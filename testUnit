@@ -1,0 +1,62 @@
+import unittest
+from hw1soln import *
+class Testhw1(unittest.TestCase):
+    def test_compare_Negative_Case(self):
+        #check if compare('sell','buy') is equals to -2 or not
+        print
+        self.assertEquals(-2,compare('sell','buy'))
+        
+    def test_compare_Positive_Case(self):
+        #check if compare('buy','sell') equals to 2
+        print
+        self.assertEquals(2,compare('buy','sell'))
+        
+    def test_compare_Zero_Case(self):
+        #compare the two same opinion should return 0 if same
+        print
+        self.assertEquals(0,compare('buy','buy'))
+        
+    def test_change_NoEnough_Change(self):
+        #check at least 2 opinions in the list
+        print
+        self.assertTrue([]==changes(['buy']))
+
+    def test_change_Upgrade_Case(self):
+        #check upgrade between opinions
+        print
+        self.assertTrue(['upgrade']==changes(['sell','buy']))
+        
+    def test_change_Downgrade_Case(self):
+        #check downgrade between opinions
+        print
+        self.assertTrue(['downgrade']==changes(['buy','sell']))
+        
+    def test_change_Same_Case(self):
+        #check same case which include twice in a row
+        print
+        self.assertTrue(['same']==changes(['buy','buy']))
+
+    def test_Current_Opinion(self):
+        #check non-empty List OpinionList
+        print
+        self.assertTrue(['strong sell', 'sell']==currentOpinions([['hold','sell','strong sell'],['sell', 'sell']]))
+
+    def test_removeEmpties(self):
+        #check if remove the empty list
+        print
+        self.assertTrue([[1,3],['a']]==removeEmpties([[],[1,3],[],['a'],[]]))
+
+    def test_averageRating_EmptyList(self):
+        #check empty list parameter in averageRating()
+        print
+        self.assertTrue(0.0==averageRating([]))
+
+    def test_averageRating_NonEmptyList(self):
+        #check non-Empty List parameter in averageRating()
+        print
+        self.assertTrue(4.5==averageRating(['strong sell', 'sell']))
+
+
+'''show the test result'''        
+suite = unittest.TestLoader().loadTestsFromTestCase(Testhw1)
+unittest.TextTestRunner(verbosity=2).run(suite)
